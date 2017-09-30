@@ -6,7 +6,7 @@ const common = require('./webpack.common.js')
 module.exports = merge(common,{
     devtool: 'inline-source-map',
     output:{
-        publicPath: '/dist/',
+        // publicPath: '/dist/'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin({
@@ -14,6 +14,7 @@ module.exports = merge(common,{
         })
     ],
     devServer: {
+        publicPath: '/dist/',
         historyApiFallback: true,
         openPage: 'dist/',
         inline: true,

@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>this is webpack loader test</title>
-    <link rel="stylesheet" href="./style/index.css" />
-    <link rel="stylesheet" href="./style/one.css" />
+    <link rel="stylesheet" href="<%= require('./style/index.css') %>">
+    <link rel="stylesheet" href="<%= require('./style/one.css') %>">
 </head>
 <body>
-    <img src="./image/shana.jpg" alt="夏娜" />
+    <img src="<%= require('./image/shana.jpg')%>" alt="夏娜" />
     <div class="yintama"></div>
 </body>
 </html>

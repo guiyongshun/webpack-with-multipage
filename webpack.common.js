@@ -3,13 +3,11 @@ const url = require('url')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const myPort = 8080;
 
 module.exports = {
     entry: {
         app: path.resolve(__dirname,'src/script/index.js'),
         one: path.resolve(__dirname,'src/script/one.js'),
-        html: path.resolve(__dirname,'src/index.html'),
         vendor: [
             'lodash'
         ]
@@ -28,27 +26,6 @@ module.exports = {
                 exclude: path.resolve(__dirname,'node_modules')
             },
             {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: ''
-                        }
-                    },
-                    'extract-loader',
-                    {
-                        loader: 'html-loader',
-                        options: {
-                            attrs: ["img:src", "link:href"],
-                            interpolate: true,
-                        }
-                    }
-                ],
-                exclude: /app.html/
-            },
-            {
                 test: /\.css$/,
                 use: [
                     {
@@ -61,23 +38,12 @@ module.exports = {
                     "extract-loader",
                     {
                         loader: "css-loader",
+                        options: {
+                            minimize: true
+                        }
                     }
                 ]
             },
-            // {
-            //     test: /\.(jpe?g|png|gif|svg)$/i,
-            //     use: [
-            //         {
-            //             loader: 'file-loader',
-            //             options: {
-            //                 name: '[name]-[hash:6].[ext]',
-            //                 outputPath: 'image/',    //相对于dist的输出路径，别在name上用[path]贼坑
-            //                 // context: ''
-            //                 publicPath: path.join(__dirname,'dist/')
-            //             }
-            //         }
-            //     ]
-            // }
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
@@ -86,15 +52,13 @@ module.exports = {
                         options: {
                             name: '[name]-[hash:6].[ext]',
                             outputPath: 'image/',
-                            limit: 8192,
+                            limit: 1,
                             publicPath: url.format({
                                 hostname:'localhost',
                                 protocol:'http:',
                                 port:8080,
                                 pathname:'/dist/'
                             })
-                            // context: 'dist',
-                            // useRelativePath: true
                         }
                     },
                     'image-webpack-loader'
@@ -105,8 +69,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname,'src/app.html'),
-            filename: 'app.html'
+            template: path.resolve(__dirname,'src/index.html'),
+            filename: 'index.html'
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
