@@ -1,6 +1,6 @@
-# 多页面webpack打包配置
+# webpack引入静态资源处理
 
-配合 (http://www.jianshu.com/p/08b00353b39a) 这篇文章一起食用更佳。
+[webpack3.0学习笔记（二）](http://www.jianshu.com/p/08b00353b39a) 配合这篇文章一起食用更佳。
 
 运行方法：
 
