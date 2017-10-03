@@ -9,7 +9,8 @@ module.exports = {
         app: path.resolve(__dirname,'src/script/index.js'),
         one: path.resolve(__dirname,'src/script/one.js'),
         vendor: [
-            'lodash'
+            'lodash',
+            // 'babel-polyfill'
         ]
     },
     output: {
@@ -23,7 +24,7 @@ module.exports = {
                 test: /\.js$/,
                 use: 'babel-loader',
                 include: path.resolve(__dirname,'src'),
-                exclude: path.resolve(__dirname,'node_modules')
+                exclude: [path.resolve(__dirname,'node_modules')]
             },
             {
                 test: /\.css$/,
@@ -61,7 +62,19 @@ module.exports = {
                             })
                         }
                     },
-                    'image-webpack-loader'
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            gifsicle: {
+                                interlaced: false,
+                                optimizationLevel: 1
+                            },
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 65
+                            }
+                        }
+                    }
                 ]
             }
         ]
